@@ -27,6 +27,10 @@ void Random::setRandomBytes(iterator start, iterator end)
 	Random::randomBuffer(start, end);
 }
 
+
+// Source of pseudo random values
+// ------------------------------
+// Randomness is sourced from the Linux `/dev/urandom` device.
 // read() stores nBytes characters into the array pointed to by first param.
 // To convert the iterator into a pointer, get the address of the
 // dereferenced value: `&*start`. Then it needs to be cast into a pointer
@@ -52,29 +56,49 @@ std::vector<unsigned char> Random::getRandomBytes() const
 	return randomBytes;
 }
 
-// If a suitable buffer is provided to the method, passed by reference,
-// the randomBytes member is copied into the buffer.
+// If a suitable buffer is provided the randomBytes member variable is copied into the buffer.
 void Random::getRandomBytes(std::vector<unsigned char>& buffer) const
 {
-//	setRandomBytes(std::begin(buffer), std::end(buffer));
 	buffer = randomBytes;
 }
 
-void Random::printRandomBytes() const
+// Print the member variable `randomBytes`.
+void Random::printHex() const
 {
-	printRandomBytes(randomBytes);
+	Random::printHex(randomBytes);
 }
 
-void Random::printRandomBytes(const std::vector<unsigned char>& v) const
+// Print the member variable `randomBytes`.
+void Random::printInt() const
 {
+	Random::printInt(randomBytes);
+}
+
+void Random::printHex(const std::vector<unsigned char>& v)
+{
+	Random::print(v, HEX);
+}
+
+void Random::printInt(const std::vector<unsigned char>& v)
+{
+	Random::print(v, INT);
+}
+
+void Random::print(const std::vector<unsigned char>& v, int mode)
+{
+	std::ostringstream os;
 	for (auto& el : v) {
-		std::cout << std::setw(2) << std::setfill('0')
-		       << std::hex << (int)el;
+		if (mode == HEX) {
+			os << std::setw(2) << std::setfill('0') << std::hex << (int)el;
+		} else {
+			os << (int)el << " ";
+		}
 	}
-	std::cout << '\n';
+	std::cout << os.str() << '\n';
 }
 
-void setBuffer(std::vector<unsigned char>& buffer)
+// Static method to populate a suitable buffer with random bytes.
+void Random::setBuffer(std::vector<unsigned char>& buffer)
 {
 	Random::randomBuffer(std::begin(buffer), std::end(buffer));
 }

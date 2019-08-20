@@ -6,6 +6,7 @@
 #include <fstream>
 #include <algorithm>	// std::generate
 #include <iomanip>
+#include <sstream>
 
 class Random
 {
@@ -21,13 +22,17 @@ public:
 	static void randomBuffer(iterator start, iterator end);
 	std::vector<unsigned char> getRandomBytes() const;
 	void getRandomBytes(std::vector<unsigned char>& buffer) const;
-	void printRandomBytes() const;
-	void printRandomBytes(const std::vector<unsigned char>& v) const;
+	void printHex() const;
+	static void printHex(const std::vector<unsigned char>& v);
+	void printInt() const;
+	static void printInt(const std::vector<unsigned char>& v);
+	static void print(const std::vector<unsigned char>& v, int mode);
 	static void setBuffer(std::vector<unsigned char>& v);
 
 private:
 	size_t nBytes;
 	std::vector<unsigned char> randomBytes;
+	enum PrintMode {HEX = 0, INT = 1};
 
 
 };
