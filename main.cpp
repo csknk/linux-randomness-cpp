@@ -3,6 +3,38 @@
 
 int main()
 {
+	int low, high, nRolls;
+	std::cout << "Enter low: " << '\n';
+	std::cin >> low;
+
+	std::cout << "Enter high: " << '\n';
+	std::cin >> high;
+
+	std::cout << "Enter number of rolls: " << '\n';
+	std::cin >> nRolls;
+
+	int m = (high - low) + 1;
+	std::cout << "modulo is " << m << '\n';
+
+	std::vector<unsigned char> results;
+	while (1) {
+		unsigned char c = Random::getRandomByte();
+		std::cout << "c is " << (int)c << '\n';
+		if (!c % m)
+			continue;
+		if (c >= 255 - (255 % m))
+			continue;
+		results.push_back((c % m) + low);
+		if (results.size() == (size_t)nRolls)
+			break;
+	}
+	for (auto& el : results)
+		std::cout << (int)el << " ";
+	std::cout << '\n';
+//	int ones = count(results.begin(), results.end(), 1);
+//	int zeroes = count(results.begin(), results.end(), 0);
+//	std::cout << "ones:\t" << ones << '\n' << "zeroes:\t" << zeroes << '\n';
+	return 0;
 	// Initialise with a size_t n, generates vector with n random bytes.
 	// ----------------------------------------------------------------
 	Random r{10};
@@ -13,10 +45,10 @@ int main()
 	// Copy randomBytes member variable into the provided buffer.
 	// ----------------------------------------------------------
 	std::vector<unsigned char> buf(5);
-	r.setRandomBytes();
+//	r.setRandomBytes(); // Reset random buffer with fresh bytes
 	r.getRandomBytes(buf);
 
-	std::cout << "Set buffer: \n";
+	
 	for (auto& el : buf)
 		std::cout << (int)el << " ";
 	std::cout << '\n';

@@ -27,7 +27,12 @@ void Random::setRandomBytes(iterator start, iterator end)
 	Random::randomBuffer(start, end);
 }
 
-
+unsigned char Random::getRandomByte()
+{
+	std::vector<unsigned char> v{1};
+	Random::setBuffer(v);
+	return v[0];
+}
 // Source of pseudo random values
 // ------------------------------
 // Randomness is sourced from the Linux `/dev/urandom` device.

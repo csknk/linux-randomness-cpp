@@ -20,6 +20,7 @@ public:
 	void setRandomBytes();
 	void setRandomBytes(iterator start, iterator end);
 	static void randomBuffer(iterator start, iterator end);
+	static unsigned char getRandomByte();
 	std::vector<unsigned char> getRandomBytes() const;
 	void getRandomBytes(std::vector<unsigned char>& buffer) const;
 	void printHex() const;
@@ -33,8 +34,6 @@ private:
 	size_t nBytes;
 	std::vector<unsigned char> randomBytes;
 	enum PrintMode {HEX = 0, INT = 1};
-
-
 };
 
 class OpenFileException{};
