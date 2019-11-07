@@ -1,26 +1,26 @@
 #include <iostream>
 #include "random.h"
+#include <limits>
 
 int main()
 {
 	// Initialise with a size_t n, generates vector with n random bytes.
 	// ----------------------------------------------------------------
-	Random r{10};
+	std::cout << "Please enter the number of random bytes required:\n";
+	size_t n;
+	while(!(std::cin >> n)) {
+		std::cout << "Please enter an unsigned integer.\n";
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+
+	Random r{n};
+	r.printHex();
+
 	for (auto& el : r.getRandomBytes())
 		std::cout << (int)el << " ";
 	std::cout << '\n';
 
-	// Copy randomBytes member variable into the provided buffer.
-	// ----------------------------------------------------------
-	std::vector<unsigned char> buf(5);
-//	r.setRandomBytes(); // Reset random buffer with fresh bytes
-	r.getRandomBytes(buf);
-
-	
-	for (auto& el : buf)
-		std::cout << (int)el << " ";
-	std::cout << '\n';
-	
 	// If initialised with a vector, fill vector with random values.
 	// -------------------------------------------------------------
 	std::vector<unsigned char> v(8);

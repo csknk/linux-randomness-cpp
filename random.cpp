@@ -94,7 +94,7 @@ void Random::print(const std::vector<unsigned char>& v, int mode)
 	std::ostringstream os;
 	for (auto& el : v) {
 		if (mode == HEX) {
-			os << std::setw(2) << std::setfill('0') << std::hex << (int)el;
+			os << std::setw(2) << std::setfill('0') << std::hex << (int)el << " ";
 		} else {
 			os << (int)el << " ";
 		}
