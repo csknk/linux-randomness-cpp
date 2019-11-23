@@ -1,17 +1,26 @@
-SOURCES:= main.cpp random.cpp random.h
-OBJECTS:= main.cpp random.cpp
-OUT:= bin/main
-CFLAGS:= -W -Wall -std=c++17 -g
-all: main diceroll random-bytes
+CXX=g++
+CPPFLAGS= -W -Wall -std=c++17 -g -I.
+SOURCES:= random.cpp random.h
+OBJECTS:= random.cpp
+OUTDIR:= bin
 
-main: $(SOURCES)
-	g++ $(CFLAGS) -o $(OUT) $(OBJECTS)
+all: main diceroll random-bytes code-usage
 
-diceroll: diceroll.cpp random.cpp random.h
-	g++ $(CFLAGS) -o bin/diceroll diceroll.cpp random.cpp
+random.o: $(SOURCES)
+	$(CXX) -c $(OBJECTS)
 
-random-bytes: random-bytes.cpp random.cpp random.h
-	g++ $(CFLAGS) -o bin/random-bytes random-bytes.cpp random.cpp
+main: $(SOURCES) main.cpp
+	$(CXX) $(CPPFLAGS) -o $(OUTDIR)/$@ $(OBJECTS) main.cpp
 
-debug: $(SOURCES)
-	g++ -W -Wall -std=c++17 -g -o $(OUT) $(OBJECTS)
+diceroll: random.o examples/diceroll.cpp
+	$(CXX) $(CPPFLAGS) -o $(OUTDIR)/diceroll $(OBJECTS) examples/diceroll.cpp
+
+random-bytes: random.o examples/random-bytes.cpp
+	$(CXX) $(CPPFLAGS) -o $(OUTDIR)/random-bytes $(OBJECTS) examples/random-bytes.cpp
+
+code-usage: random.o examples/code-usage.cpp
+	$(CXX) $(CPPFLAGS) -o $(OUTDIR)/code-usage $(OBJECTS) examples/code-usage.cpp
+
+.PHONY: clean
+clean:
+	rm -f bin/* *.o *.c~ *.h~

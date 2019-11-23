@@ -1,8 +1,9 @@
 #include <iostream>
 #include "random.h"
 
-int main()
-{
+int main() {
+
+	std::cout << "Die-rolling simulator.\n";
 	int low, high, nRolls;
 	std::cout << "Enter low: " << '\n';
 	std::cin >> low;

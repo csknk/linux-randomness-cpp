@@ -29,18 +29,18 @@ Random r;
 std::vector<unsigned char> buf;
 r.getRandomBytes(buf);
 // buf now contains random bytes
-```
-	for (auto& el : buf)
-		std::cout << (int)el << " ";
-	std::cout << '\n';
-	
-	// If initialised with a vector, fill vector with random values.
-	// -------------------------------------------------------------
-	std::vector<unsigned char> v(32);
-	Random r2{v};
-	
-	std::cout << "printRandomBytes(v) =\n";
-	r2.printRandomBytes(v);
-	
-	return 0;
+for (auto& el : buf)
+std::cout << (int)el << " ";
+std::cout << '\n';
+
+// If initialised with a vector, fill vector with random values.
+// -------------------------------------------------------------
+std::vector<unsigned char> v(32);
+Random r2{v};
+
+std::cout << "printRandomBytes(v) =\n";
+r2.printRandomBytes(v);
+
+return 0;
 }
+```

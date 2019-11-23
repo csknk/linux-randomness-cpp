@@ -15,27 +15,13 @@ int main()
 	}
 
 	Random r{n};
+	std::cout << n << " random bytes sourced from /dev/urandom, displayed in hex:\n";
 	r.printHex();
 
+	std::cout << "Same random bytes, displayed as decimal integers:\n";
 	for (auto& el : r.getRandomBytes())
 		std::cout << (int)el << " ";
 	std::cout << '\n';
-
-	// If initialised with a vector, fill vector with random values.
-	// -------------------------------------------------------------
-	std::vector<unsigned char> v(8);
-	Random r2{v};
-	r2.printHex(v);
-	r2.printInt(v);
-	std::cout << "r2.printHex(): ";
-	r2.printHex(); // Prints the randomBytes member variable - empty.
-
-	// Populate a buffer with random bytes statically.
-	// ----------------------------------------------
-	std::vector<unsigned char> s(10);
-	Random::setBuffer(s);
-	std::cout << "Static method: ";
-	Random::printHex(s);
 	
 	return 0;
 }

@@ -27,19 +27,26 @@ void Random::setRandomBytes(iterator start, iterator end)
 	Random::randomBuffer(start, end);
 }
 
+// Wrapper for setRandomBytes(iterator, iterator).
+void Random::setRandomBytes()
+{
+	setRandomBytes(std::begin(randomBytes), std::end(randomBytes));
+}
+
 unsigned char Random::getRandomByte()
 {
 	std::vector<unsigned char> v{1};
 	Random::setBuffer(v);
 	return v[0];
 }
+
 // Source of pseudo random values
 // ------------------------------
-// Randomness is sourced from the Linux `/dev/urandom` device.
-// read() stores nBytes characters into the array pointed to by first param.
-// To convert the iterator into a pointer, get the address of the
-// dereferenced value: `&*start`. Then it needs to be cast into a pointer
-// of the correct type for `std::ifstream::read()`.
+// Randomness is sourced from the Linux `/dev/urandom` device. read() stores nBytes characters
+// into the array pointed to by first param.
+//
+// To convert the iterator into a pointer, get the address of the dereferenced value: `&*start`.
+// Then it needs to be cast into a pointer of the correct type for `std::ifstream::read()`.
 void Random::randomBuffer(iterator start, iterator end)
 {
 	size_t nBytes = end - start;
@@ -48,12 +55,6 @@ void Random::randomBuffer(iterator start, iterator end)
 		throw OpenFileException{};
 	
 	file.read((char*)&*start, nBytes);
-}
-
-// Wrapper for setRandomBytes(iterator, iterator).
-void Random::setRandomBytes()
-{
-	setRandomBytes(std::begin(randomBytes), std::end(randomBytes));
 }
 
 std::vector<unsigned char> Random::getRandomBytes() const
