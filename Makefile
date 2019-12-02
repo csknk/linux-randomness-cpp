@@ -7,7 +7,7 @@ OUTDIR:= bin
 all: main diceroll random-bytes code-usage
 
 random.o: $(SOURCES)
-	$(CXX) -c $(OBJECTS)
+	$(CXX) $(CPPFLAGS) -c $(OBJECTS)
 
 main: $(SOURCES) main.cpp
 	$(CXX) $(CPPFLAGS) -o $(OUTDIR)/$@ $(OBJECTS) main.cpp

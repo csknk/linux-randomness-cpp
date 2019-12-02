@@ -7,6 +7,7 @@
 #include <algorithm>	// std::generate
 #include <iomanip>
 #include <sstream>
+#include <iterator>
 
 class Random
 {
