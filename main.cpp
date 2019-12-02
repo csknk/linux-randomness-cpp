@@ -15,13 +15,15 @@ int main()
 	Random r{10};
 	std::cout << "Initialise with a size:\n";
 	r.printInt();
-	// To access the random bytes use getRandomBytes()
-	for (auto& el : r.getRandomBytes())
-		std::cout << (int)el << " ";
-	std::cout << '\n';
 	r.setRandomBytes(); // Reset random buffer with fresh bytes
 	std::cout << "Reset the random buffer with fresh bytes: setRandomBytes()\n";
 	r.printInt();
+	std::cout << "Custom output:\n";
+	for (auto& el: r.getRandomBytes()) {
+		std::cout << std::setw(2) << std::setfill('0') << std::hex << (int)el;
+	}
+	std::cout << '\n';
+
 	LINEBREAK;
 
 	// If initialised with a suitable vector, fill vector with random values.
