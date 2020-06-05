@@ -17,6 +17,7 @@ int main()
 	r.printInt();
 	r.setRandomBytes(); // Reset random buffer with fresh bytes
 	std::cout << "Reset the random buffer with fresh bytes: setRandomBytes()\n";
+	r.printHex();
 	r.printInt();
 	std::cout << "Custom output:\n";
 	for (auto& el: r.getRandomBytes()) {

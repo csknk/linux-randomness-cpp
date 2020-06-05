@@ -20,9 +20,6 @@ int main() {
 	std::vector<unsigned char> results;
 	while (1) {
 		unsigned char c = Random::getRandomByte();
-		std::cout << "c is " << (int)c << '\n';
-		if (!c % m)
-			continue;
 		if (c >= 255 - (255 % m))
 			continue;
 		results.push_back((c % m) + low);
